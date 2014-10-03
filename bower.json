@@ -1,0 +1,7 @@
+{
+  "name": "coge",
+  "version": "0.0.1",
+  "dependencies": {
+    "backbone.marionette": "~2.0.1"
+  }
+}

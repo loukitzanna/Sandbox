@@ -1,0 +1,51 @@
+h1{
+  font-size: 50px;
+  color: #0D2B85;
+}
+
+#content{
+  padding-left: 50px;
+  padding-right: 100px;
+
+  border-style: solid;
+  border-width:3px;
+  border-color: 000;
+  border-radius: 5px;
+}
+
+#minicontent{
+
+  margin-left: 30px;
+  background-color: rgba(198, 218, 254, 1);
+}
+
+.minibox{
+  //display:inline-block;
+
+  width: 200px;
+  height: 200px;
+  margin: auto;
+
+}
+
+.status-table {
+  display:inline-block;
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+  padding: 20px;
+  margin: auto;
+
+  table {
+    width:100%;
+    border-collapse: collapse;
+  }
+
+  table, th, td {
+    border: 1px solid black;
+    text-align: center;
+  }
+
+
+}
+
