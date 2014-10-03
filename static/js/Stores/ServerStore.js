@@ -7,10 +7,18 @@ define(function (require) {
 
     var _servers = null;
     var _isFetching = false;
-
+    var isPolling = false;
 //
 // CRUD Operations
 //
+    var poll = function(instance){
+        setTimeout(function(){
+
+               fetchServer();
+                poll();
+        }, 5000);
+    };
+
 
     var fetchServer = function () {
         if (!_isFetching) {
@@ -25,6 +33,12 @@ define(function (require) {
                     //servers.fetch().done(function () {
                     _isFetching = false;
                     _servers = data;
+
+                    if(!isPolling){
+                        poll();
+                        isPolling = true;
+                    }
+
                     ServerStore.emitChange();
                     //}
 

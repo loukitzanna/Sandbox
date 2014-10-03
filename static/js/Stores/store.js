@@ -17,7 +17,12 @@ define(function (require) {
         emitChange: function () {
             this.trigger(CHANGE_EVENT);
         }
+
+
+
     };
+
+
 
     _.extend(Store, Backbone.Events);
     return Store;
