@@ -1,17 +1,23 @@
 /** @jsx React.DOM */
+define(
+    [
+        'react',
+        'serverTable.react'
+    ],
+function (React, serverTable ){
 
-var Box = React.createClass({
-        render: function() {
-// page setup
-          return (
-          	<div className = "boxes">
-              <h3>This is  box full of boxes</h3>
+  return React.createClass({
+        render: function () {
 
-                <serverTable/>
+            return (
+                <div className = "boxes">
+                    <h3>This is  box full of boxes</h3>
 
+                    <serverTable/>
 
-
-              </div>
-            ); 
+                </div>
+                );
         }
-      });
+    });
+}
+);

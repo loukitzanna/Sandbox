@@ -1,72 +1,73 @@
 /** @jsx React.DOM */
+define(function (require) {
+    'use strict';
 
-var serverTable = React.createClass({
+    var ServerStore = require("stores/ServerStore");
+
+    var React = require("react");
+
+        return React.createClass({
 
 
-    // call serverStore
+            // call serverStore
 
+            //
+            getInitialState: function () {
+                return this.getState();
+            },
 
+            updateState: function () {
+                if (this.isMounted()) this.setState(this.getState());
+            },
 
+            componentDidMount: function () {
+                ServerStore.addChangeListener(this.updateState);
 
-   //
-    getInitialState: function() {
-        return this.getState();
-    },
+            },
 
-    updateState: function() {
-        if (this.isMounted()) this.setState(this.getState());
-    },
+            componentWillUnmount: function () {
+                ServerStore.removeChangeListener(this.updateState);
 
-    componentDidMount: function () {
-        ServerStore.addChangeListener(this.updateState);
+            },
 
-    },
+            getState: function () {
+                return {
+                    servers: ServerStore.getAll()
+                };
+            },
 
-    componentWillUnmount: function () {
-        ServerStore.removeChangeListener(this.updateState);
-
-    },
-
-    getState: function() {
-        return {
-            servers: ServerStore.getAll()
-        };
-    },
-
-    renderTableRow: function(server){
-      return (
-          <tr key = {server.id}>
-              <td>{server.id}</td>
-              <td>{server.name}</td>
+            renderTableRow: function (server) {
+                return (
+                    <tr key = {server.id}>
+                        <td>{server.id}</td>
+                        <td>{server.name}</td>
           {this.renderServerStatus(server)}
-          </tr>
-          )
-    },
-
-    renderServerStatus: function(server){
-
-            if (server.status === "online"){
-                return(
-                    //span gliphicon
-                    <td>
-                        <span className="glyphicon glyphicon-ok-circle"></span>
-                    </td>
+                    </tr>
                     )
-            }
-            else{
-                return(
-                    //other glyph
-                    <td>
-                        <span className="glyphicon glyphicon-remove-circle"></span>
-                    </td>
-                    )
-            }
+            },
 
+            renderServerStatus: function (server) {
 
-    },
+                if (server.status === "online") {
+                    return(
+                        //span gliphicon
+                        <td>
+                            <span className="glyphicon glyphicon-ok-circle"></span>
+                        </td>
+                        )
+                }
+                else {
+                    return(
+                        //other glyph
+                        <td>
+                            <span className="glyphicon glyphicon-remove-circle"></span>
+                        </td>
+                        )
+                }
 
-        render: function(){
+            },
 
+            render: function () {
 
                 if (this.state.servers) {
                     return (
@@ -83,16 +84,18 @@ var serverTable = React.createClass({
                         );
                 }
 
-                else{
+                else {
                     return(
 
 
-                    <div className = "status-table">
+                        <div className = "status-table">
                         :)
 
                         </div>
                         )
+                }
             }
-        }
 
-  });
+        });
+    }
+)

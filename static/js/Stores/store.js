@@ -1,17 +1,24 @@
-var CHANGE_EVENT = 'change';
+define(function (require) {
+    'use strict';
 
-var Store = {
-    addChangeListener: function (callback) {
-        this.on(CHANGE_EVENT, callback);
-    },
+    var Backbone = require("backbone");
 
-    removeChangeListener: function (callback) {
-        this.off(CHANGE_EVENT, callback);
-    },
+    var CHANGE_EVENT = 'change';
 
-    emitChange: function () {
-        this.trigger(CHANGE_EVENT);
-    }
-};
+    var Store = {
+        addChangeListener: function (callback) {
+            this.on(CHANGE_EVENT, callback);
+        },
 
-_.extend(Store, Backbone.Events);
+        removeChangeListener: function (callback) {
+            this.off(CHANGE_EVENT, callback);
+        },
+
+        emitChange: function () {
+            this.trigger(CHANGE_EVENT);
+        }
+    };
+
+    _.extend(Store, Backbone.Events);
+    return Store;
+});

@@ -1,5 +1,6 @@
 /** @jsx React.DOM */
 
+
 var MiniBox = React.createClass({
         render: function() {
           
