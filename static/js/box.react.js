@@ -2,9 +2,11 @@
 define(
     [
         'react',
-        'serverTable.react'
+        'serverTable.react',
+        'NagiosTable.react',
+        'updateWindow.react'
     ],
-function (React, serverTable ){
+function (React, serverTable, NagiosTable, updateWindow){
 
   return React.createClass({
         render: function () {
@@ -13,7 +15,11 @@ function (React, serverTable ){
                 <div className = "boxes">
                     <h3>This is  box full of boxes</h3>
 
+                    <updateWindow/>
+
                     <serverTable/>
+
+                    <NagiosTable/>
 
                 </div>
                 );

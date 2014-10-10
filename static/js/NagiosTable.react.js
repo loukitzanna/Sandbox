@@ -1,12 +1,13 @@
 /** @jsx React.DOM */
 define(function (require) {
-    'use strict';
+        'use strict';
 
-    var ServerStore = require("stores/ServerStore");
+        var NagiosStore = require("stores/NagiosStore");
 
-    var React = require("react");
+        var React = require("react");
 
         return React.createClass({
+
 
 
             // call serverStore
@@ -21,40 +22,56 @@ define(function (require) {
             },
 
             componentDidMount: function () {
-                ServerStore.addChangeListener(this.updateState);
+                NagiosStore.addChangeListener(this.updateState);
 
             },
 
             componentWillUnmount: function () {
-                ServerStore.removeChangeListener(this.updateState);
+                NagiosStore.removeChangeListener(this.updateState);
 
             },
 
             getState: function () {
                 return {
-                    servers: ServerStore.getAll()
+                    data: NagiosStore.getAll(),
+                    hosts: NagiosStore.getNames()
                 };
             },
 
-            renderTableRow: function (server) {
+
+            checkData: function(something){
+              console.log(something);
+            },
+
+
+
+   // {this.renderServerStatus(server)}
+
+            /*printAll: function (server) {
+
+
+
+            },*/
+
+            renderTableRow: function (name) {
 
 
                 //server.name = host
 
 
                 return (
-                    <tr key = {server.id}>
-                        <td>{server.id}</td>
-                        <td>{server.name}</td>
-          {this.renderServerStatus(server)}
+                    <tr key = {name}>
+                        <td>{name}</td>
+                        <td>{this.state.data[name].last_check}</td>
+                            {this.renderServerStatus(this.state.data[name].current_state)}
                     </tr>
                     )
-            },
+            },//
 
-            renderServerStatus: function (server) {
+            renderServerStatus: function (status) {
                 // server.current_state === 0
                 // server.status === "online"
-                if (server.status === "online") {
+                if (status == "0") {
                     return(
                         //span gliphicon
                         <td>
@@ -75,17 +92,17 @@ define(function (require) {
 
             render: function () {
 
-                if (this.state.servers) {
+                if (this.state.data) {
+
                     return (
 
-                        <div className = "status-table" id="tiny">
+                        <div className = "status-table">
+                            <h2>Here is a list of Hosts and Status:</h2>
                             <table>
-                                <th>Number</th>
                                 <th>Server</th>
+                                <th>Last Check</th>
                                 <th>Status</th>
-
-                    {this.state.servers.map(this.renderTableRow)}
-
+                                {this.state.hosts.map(this.renderTableRow)}
                             </table>
 
                         </div>
@@ -97,7 +114,7 @@ define(function (require) {
 
 
                         <div className = "status-table">
-                        :)
+                        :( <br/>
                         Loading!
                         </div>
                         )
