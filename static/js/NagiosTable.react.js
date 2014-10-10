@@ -75,7 +75,7 @@ define(function (require) {
                     return(
                         //span gliphicon
                         <td>
-                            <span className="glyphicon glyphicon-ok-circle"></span>
+                            <span className="glyphicon glyphicon-ok-sign"></span>
                         </td>
                         )
                 }
@@ -83,7 +83,7 @@ define(function (require) {
                     return(
                         //other glyph
                         <td>
-                            <span className="glyphicon glyphicon-remove-circle"></span>
+                            <span className="glyphicon glyphicon-remove-sign"></span>
                         </td>
                         )
                 }
